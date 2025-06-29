@@ -12,6 +12,9 @@ console.log(process.env.MONGO_URI);
 
 connectDB();
 
+// Middleware to parse JSON requests
+app.use(express.json());
+
 app.use("/api/notes",notesRoutes);
 
 app.listen(PORT,()=>{
