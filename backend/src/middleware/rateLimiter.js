@@ -1,6 +1,6 @@
 import ratelimit from "../config/upstash.js";
 
-const rateLimoter = async (req, res, next) => {
+const rateLimiter = async (req, res, next) => {
   try {
     const { success } = await ratelimit.limit("my-limit-key");
     if (!success) {
@@ -18,4 +18,4 @@ const rateLimoter = async (req, res, next) => {
   }
 };
 
-export default rateLimoter;
+export default rateLimiter;

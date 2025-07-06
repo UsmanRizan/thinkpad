@@ -1,8 +1,10 @@
 import express from "express";
+import cors from "cors";
+import dotenv from "dotenv";
+
 import notesRoutes from "./routes/notesRoutes.js";
 import { connectDB } from "./config/db.js";
-import dotenv from "dotenv";
-import rateLimoter from "./middleware/rateLimiter.js";
+import rateLimiter from "./middleware/rateLimiter.js";
 
 dotenv.config();
 
@@ -13,7 +15,12 @@ console.log(process.env.MONGO_URI);
 
 // Middleware to parse JSON requests
 app.use(express.json());
-app.use(rateLimoter);
+app.use(
+  cors({
+    origin: "http://localhost:5173", // Adjust this to your frontend URL
+  })
+);
+app.use(rateLimiter);
 
 app.use("/api/notes", notesRoutes);
 
